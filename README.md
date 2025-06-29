@@ -66,6 +66,57 @@ Ce tutoriel explique étape par étape :
 
 Pour plus d’informations, consulte la documentation officielle d’Astronomer.
 
+## Configuration de Weaviate Cloud
+
+Ce projet peut utiliser [Weaviate Cloud](https://weaviate.io/developers/weaviate/cloud) comme base de données vectorielle pour stocker et rechercher des embeddings.
+
+### 1. Création d’un compte et d’une instance Weaviate Cloud
+
+1. Rendez-vous sur [Weaviate Cloud Console](https://console.weaviate.cloud/).
+2. Créez un compte ou connectez-vous.
+3. Créez une nouvelle instance (choisissez la région, le nom, etc.).
+4. Une fois l’instance créée, récupérez :
+   - L’**URL de l’instance** (ex : `https://my-instance.weaviate.network`)
+   - Le **API Key** ou le **token d’authentification** si activé
+
+### 2. Configuration de la connexion dans Airflow
+
+Pour que vos DAGs Airflow puissent accéder à Weaviate, il faut configurer une connexion dans l’interface Airflow :
+
+1. Ouvrez l’interface web d’Airflow.
+2. Allez dans le menu **Admin > Connections**.
+3. Cliquez sur **+** pour ajouter une nouvelle connexion.
+4. Remplissez les champs comme suit :
+   - **Conn Id** : `my_weaviate_conn`  
+     > C’est ce nom qui sera utilisé dans le code pour référencer la connexion.
+   - **Conn Type** : `HTTP` (ou personnalisé si un provider Weaviate est installé)
+   - **Host** : l’URL de votre instance Weaviate (ex : `https://my-instance.weaviate.network`)
+   - **Password** ou **Extra** : ajoutez ici le token d’authentification/API Key si nécessaire, par exemple :
+     ```json
+     {"X-OpenAI-Api-Key": "votre-cle-api"}
+     ```
+   - **Description** : (optionnel) Connexion à Weaviate Cloud
+
+5. Enregistrez la connexion.
+
+### 3. Utilisation de `my_weaviate_conn` dans le code
+
+Dans vos DAGs ou scripts, vous pouvez référencer cette connexion par son `Conn Id` :
+
+```python
+from airflow.hooks.base import BaseHook
+
+conn = BaseHook.get_connection("my_weaviate_conn")
+weaviate_url = conn.host
+api_key = conn.password  # ou via conn.extra si stocké dans Extra
+```
+
+> **Remarque :**  
+> Le nom `"my_weaviate_conn"` est arbitraire, mais il doit correspondre exactement au `Conn Id` défini dans Airflow.  
+> Modifiez-le dans le code si vous choisissez un autre nom lors de la configuration.
+
+Pour plus d’informations, consulte la [documentation officielle Weaviate Cloud](https://weaviate.io/developers/weaviate/cloud) et la [documentation Airflow sur les connexions](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection/index.html).
+
 ---
 
 N’hésitez pas à consulter les ressources ci-dessus pour approfondir vos connaissances sur Airflow et Astronomer. 
