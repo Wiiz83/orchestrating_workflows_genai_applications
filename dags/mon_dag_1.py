@@ -89,14 +89,11 @@ def fetch_data():
 
         embedding_model = TextEmbedding(EMBEDDING_MODEL_NAME)
 
-
         book_descriptions = [book["description"] for book in book_data]
         description_embeddings = [
             list(map(float, next(embedding_model.embed([desc]))))
             for desc in book_descriptions
         ]
-
-
 
         return description_embeddings
 
