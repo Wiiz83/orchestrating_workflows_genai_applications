@@ -1,0 +1,8 @@
+# python package requirements file
+# Astro Runtime includes the following pre-installed providers packages: https://docs.astronomer.io/astro/runtime-image-architecture#provider-packages
+weaviate-client==4.14.1
+fastembed==0.6.1
+ipython
+ipywidgets>=8.0.0
+jupyter>=1.0.0
+protobuf==5.29.0
