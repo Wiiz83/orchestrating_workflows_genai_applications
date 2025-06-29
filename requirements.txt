@@ -8,3 +8,5 @@ jupyter>=1.0.0
 protobuf==5.29.0
 apache-airflow
 pytest
+apache-airflow-providers-weaviate
+pendulum

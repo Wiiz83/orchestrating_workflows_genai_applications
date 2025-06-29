@@ -1,11 +1,16 @@
 from airflow.sdk import chain, dag, task, Asset
 from pendulum import datetime
 from pathlib import Path
+import os
+from airflow.io.path import ObjectStoragePath
 
 COLLECTION_NAME = "Books"
 EMBEDDING_MODEL_NAME = "BAAI/bge-small-en-v1.5"
-PROJECT_ROOT = Path(__file__).resolve().parents[1]     # /usr/local/airflow
-BOOK_DESCRIPTION_FOLDER  = PROJECT_ROOT / "include" / "data"
+#PROJECT_ROOT = Path(__file__).resolve().parents[1]     # /usr/local/airflow
+#BOOK_DESCRIPTION_FOLDER = PROJECT_ROOT / "include" / "data"
+#BOOK_DESCRIPTION_FOLDER = "/opt/airflow/include/data"
+BOOK_DESCRIPTION_FOLDER = ObjectStoragePath("file:///usr/local/airflow/include/data")
+BOOK_DESCRIPTION_FOLDER2 = ObjectStoragePath("file://include/data")
 
 @dag(
     start_date=datetime(2025, 4, 1),
@@ -39,6 +44,14 @@ def fetch_data():
         book_description_files = [
             f for f in os.listdir(BOOK_DESCRIPTION_FOLDER) if f.endswith(".txt")
         ]
+
+        book_description_files2 = [
+            f for f in os.listdir(BOOK_DESCRIPTION_FOLDER2) if f.endswith(".txt")
+        ]
+
+        print(book_description_files)
+        print(book_description_files2)
+
         return book_description_files
 
     _list_book_description_files = list_book_description_files()
