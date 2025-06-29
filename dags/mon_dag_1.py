@@ -16,7 +16,11 @@ def fetch_data():
     def create_collection_if_not_exists() -> None:
         from airflow.providers.weaviate.hooks.weaviate import WeaviateHook
 
-        hook = WeaviateHook("my_weaviate_conn")
+        hook = WeaviateHook(
+            conn_id="my_weaviate_conn",
+            grpc_port=None          # désactive totalement gRPC
+        )
+
         client = hook.get_conn()
 
         existing_collections = client.collections.list_all()
@@ -110,7 +114,10 @@ def fetch_data():
         from airflow.providers.weaviate.hooks.weaviate import WeaviateHook
         from weaviate.classes.data import DataObject
 
-        hook = WeaviateHook("my_weaviate_conn")
+        hook = WeaviateHook(
+            conn_id="my_weaviate_conn",
+            grpc_port=None          # désactive totalement gRPC
+        )
         client = hook.get_conn()
         collection = client.collections.get(COLLECTION_NAME)
 
