@@ -1,10 +1,8 @@
-%%writefile ../../dags/fetch_data.py 
-
 from airflow.sdk import chain, dag, task, Asset
 from pendulum import datetime
 
 COLLECTION_NAME = "Books"
-BOOK_DESCRIPTION_FOLDER = "/home/jovyan/include/data"
+BOOK_DESCRIPTION_FOLDER = "include/data"
 EMBEDDING_MODEL_NAME = "BAAI/bge-small-en-v1.5"
 
 
