@@ -9,7 +9,7 @@ EMBEDDING_MODEL_NAME = "BAAI/bge-small-en-v1.5"
 #PROJECT_ROOT = Path(__file__).resolve().parents[1]     # /usr/local/airflow
 #BOOK_DESCRIPTION_FOLDER = PROJECT_ROOT / "include" / "data"
 #BOOK_DESCRIPTION_FOLDER = "/opt/airflow/include/data"
-BOOK_DESCRIPTION_FOLDER = ObjectStoragePath("file:///usr/local/airflow/include/data")
+BOOK_DESCRIPTION_FOLDER = "/usr/local/airflow/include/data"
 BOOK_DESCRIPTION_FOLDER2 = ObjectStoragePath("file://include/data")
 
 @dag(
@@ -45,12 +45,7 @@ def fetch_data():
             f for f in os.listdir(BOOK_DESCRIPTION_FOLDER) if f.endswith(".txt")
         ]
 
-        book_description_files2 = [
-            f for f in os.listdir(BOOK_DESCRIPTION_FOLDER2) if f.endswith(".txt")
-        ]
-
         print(book_description_files)
-        print(book_description_files2)
 
         return book_description_files
 
