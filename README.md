@@ -30,6 +30,7 @@ Avant de commencer, assurez-vous d’avoir les éléments suivants installés su
 - `workflows/` : Fichiers de configuration pour l’intégration et le déploiement CI/CD.
 - `Dockerfile` : Pour l’exécution locale ou le déploiement dans un conteneur Docker.
 - `requirements.txt` : Dépendances Python nécessaires au projet.
+- `packages.txt` : Liste de paquets système à installer lors du build sur Astronomer.
 
 ## Lancement rapide
 
@@ -48,6 +49,28 @@ Avant de commencer, assurez-vous d’avoir les éléments suivants installés su
 Pour plus d’informations, consultez la documentation officielle :  
 https://www.astronomer.io/docs/astro/deploy-github-integration/
 
+## CI/CD manuel avec GitHub Actions
+
+Si tu souhaites configurer un pipeline CI/CD personnalisé pour déployer tes DAGs sur Astro à l’aide de GitHub Actions (et donc d’un dossier `workflows`), suis le guide officiel :
+
+👉 [Mettre en place le CI/CD avec GitHub Actions sur Astronomer](https://www.astronomer.io/docs/astro/first-dag-github-actions/)
+
+Ce tutoriel explique étape par étape :
+- Comment créer un déploiement Astro
+- Comment forker un projet exemple
+- Comment configurer le workflow GitHub Actions pour déployer automatiquement sur Astro
+- Comment déclencher et vérifier le déploiement
+
+> **Remarque :**  
+> Cette méthode est utile si tu veux garder le contrôle sur tes workflows CI/CD ou si tu ne souhaites pas utiliser l’intégration native GitHub d’Astronomer.
+
+Pour plus d’informations, consulte la documentation officielle d’Astronomer.
+
 ---
 
 N’hésitez pas à consulter les ressources ci-dessus pour approfondir vos connaissances sur Airflow et Astronomer. 
+
+> **Important :**  
+> Le fichier `packages.txt` doit être présent à la racine du projet pour que le build sur Astronomer fonctionne, même s’il est vide.  
+> Ce fichier permet d’installer des paquets système supplémentaires lors du build.  
+> Si tu n’as pas de dépendances système à ajouter, laisse-le vide. 
