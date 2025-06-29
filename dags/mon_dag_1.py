@@ -1,20 +1,21 @@
 from airflow.sdk import chain, dag, task, Asset
 from pendulum import datetime
+from pathlib import Path
 
 COLLECTION_NAME = "Books"
-BOOK_DESCRIPTION_FOLDER = "include/data"
 EMBEDDING_MODEL_NAME = "BAAI/bge-small-en-v1.5"
-
+PROJECT_ROOT = Path(__file__).resolve().parents[1]     # /usr/local/airflow
+BOOK_DESCRIPTION_FOLDER  = PROJECT_ROOT / "include" / "data"
 
 @dag(
     start_date=datetime(2025, 4, 1),
-    schedule="@hourly"
+    schedule=None  # Exécution uniquement sur déclenchement manuel
+    #schedule="@hourly" pour une exécution chaque heure 
 )
 def fetch_data():
 
     @task
     def create_collection_if_not_exists() -> None:
-        print(10/0)
         from airflow.providers.weaviate.hooks.weaviate import WeaviateHook
 
         hook = WeaviateHook("my_weaviate_conn")
@@ -44,12 +45,11 @@ def fetch_data():
 
     @task
     def transform_book_description_files(book_description_file: str) -> str:
-        import json
         import os
 
-        with open(
-            os.path.join(BOOK_DESCRIPTION_FOLDER, book_description_file), "r"
-        ) as f:
+        book_description_file_path = BOOK_DESCRIPTION_FOLDER / book_description_file
+
+        with open(book_description_file_path, "r") as f:
             book_descriptions = f.readlines()
 
         titles = [

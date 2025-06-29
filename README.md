@@ -1,127 +1,127 @@
 # orchestrating_workflows_genai_applications
 
-## Objectif du projet
+## Project Objective
 
-Ce projet a pour objectif de démontrer comment orchestrer des workflows pour des applications utilisant l’Intelligence Artificielle Générative (GenAI) à l’aide d’Apache Airflow. Il propose des exemples de DAGs, des scripts d’aide, ainsi qu’une configuration prête à l’emploi pour déployer et gérer vos pipelines de données et d’IA.
+This project aims to demonstrate how to orchestrate workflows for applications using Generative Artificial Intelligence (GenAI) with Apache Airflow. It provides example DAGs, helper scripts, and a ready-to-use configuration to deploy and manage your data and AI pipelines.
 
-## Prérequis
+## Prerequisites
 
-Avant de commencer, assurez-vous d’avoir les éléments suivants installés sur votre machine :
+Before you start, make sure you have the following installed on your machine:
 
-- Python 3.8 ou supérieur
-- [Docker](https://www.docker.com/) (pour l’exécution locale ou le déploiement)
-- [Astro CLI](https://www.astronomer.io/docs/astro/cli/develop-project) (pour le développement et le déploiement sur Astronomer)
-- Un compte GitHub (pour l’intégration continue et le déploiement)
-- (Optionnel) Un compte Astronomer pour le déploiement cloud
+- Python 3.8 or higher
+- [Docker](https://www.docker.com/) (for local execution or deployment)
+- [Astro CLI](https://www.astronomer.io/docs/astro/cli/develop-project) (for development and deployment on Astronomer)
+- A GitHub account (for continuous integration and deployment)
+- (Optional) An Astronomer account for cloud deployment
 
-## Ressources utiles
+## Useful Resources
 
-- [Développer votre projet Astro](https://www.astronomer.io/docs/astro/cli/develop-project)
-- [Projet de démarrage Astro (exemples de DAGs)](https://github.com/astronomer/astro-example-dags)
-- [Déployer le code avec l’intégration GitHub d’Astro](https://www.astronomer.io/docs/astro/deploy-github-integration)
-- [Introduction sur Apache Airflow](https://blog.stephane-robert.info/docs/services/scheduling/apache-airflow/)
+- [Develop your Astro project](https://www.astronomer.io/docs/astro/cli/develop-project)
+- [Astro starter project (example DAGs)](https://github.com/astronomer/astro-example-dags)
+- [Deploy code with Astro's GitHub integration](https://www.astronomer.io/docs/astro/deploy-github-integration)
+- [Introduction to Apache Airflow](https://blog.stephane-robert.info/docs/services/scheduling/apache-airflow/)
 
-## Structure du projet
+## Project Structure
 
-- `dags/` : Contient les DAGs Airflow d’exemple pour orchestrer des workflows GenAI.
-- `helper.py` : Fonctions utilitaires pour les DAGs.
-- `include/` : Données et ressources additionnelles utilisées par les workflows.
-- `tests/` : Tests pour valider l’intégrité des DAGs.
-- `workflows/` : Fichiers de configuration pour l’intégration et le déploiement CI/CD.
-- `Dockerfile` : Pour l’exécution locale ou le déploiement dans un conteneur Docker.
-- `requirements.txt` : Dépendances Python nécessaires au projet.
-- `packages.txt` : Liste de paquets système à installer lors du build sur Astronomer.
+- `dags/`: Contains example Airflow DAGs to orchestrate GenAI workflows.
+- `helper.py`: Utility functions for the DAGs.
+- `include/`: Additional data and resources used by the workflows.
+- `tests/`: Tests to validate the integrity of the DAGs.
+- `workflows/`: Configuration files for CI/CD integration and deployment.
+- `Dockerfile`: For local execution or deployment in a Docker container.
+- `requirements.txt`: Python dependencies required for the project.
+- `packages.txt`: List of system packages to install during the build on Astronomer.
 
-## Lancement rapide
+## Quick Start
 
-1. Clonez ce dépôt.
-2. Installez les dépendances :  
+1. Clone this repository.
+2. Install the dependencies:  
    `pip install -r requirements.txt`
-3. (Optionnel) Lancez le projet avec Docker ou Astro CLI selon votre environnement.
+3. (Optional) Start the project with Docker or Astro CLI depending on your environment.
 
-## Déploiement sur Astro avec l’intégration GitHub
+## Deployment on Astro with GitHub Integration
 
-> **Important :**  
-> Si vous utilisez l’intégration native GitHub d’Astronomer, il n’est pas nécessaire d’avoir un dossier `workflows/` ou de configurer des GitHub Actions pour le déploiement CI/CD.  
-> L’intégration native permet de connecter directement votre dépôt à Astro et déclenche automatiquement les déploiements lors des commits ou des pull requests fusionnées sur les branches mappées.  
-> Utilisez un dossier `workflows/` uniquement si vous souhaitez des automatisations personnalisées (tests, lint, etc.) en plus du déploiement.
+> **Important:**  
+> If you use Astronomer's native GitHub integration, you do not need a `workflows/` folder or to configure GitHub Actions for CI/CD deployment.  
+> The native integration allows you to connect your repository directly to Astro and automatically triggers deployments when commits or pull requests are merged into mapped branches.  
+> Use a `workflows/` folder only if you want custom automations (tests, linting, etc.) in addition to deployment.
 
-Pour plus d’informations, consultez la documentation officielle :  
+For more information, see the official documentation:  
 https://www.astronomer.io/docs/astro/deploy-github-integration/
 
-## CI/CD manuel avec GitHub Actions
+## Manual CI/CD with GitHub Actions
 
-Si tu souhaites configurer un pipeline CI/CD personnalisé pour déployer tes DAGs sur Astro à l’aide de GitHub Actions (et donc d’un dossier `workflows`), suis le guide officiel :
+If you want to set up a custom CI/CD pipeline to deploy your DAGs to Astro using GitHub Actions (and thus a `workflows` folder), follow the official guide:
 
-👉 [Mettre en place le CI/CD avec GitHub Actions sur Astronomer](https://www.astronomer.io/docs/astro/first-dag-github-actions/)
+👉 [Set up CI/CD with GitHub Actions on Astronomer](https://www.astronomer.io/docs/astro/first-dag-github-actions/)
 
-Ce tutoriel explique étape par étape :
-- Comment créer un déploiement Astro
-- Comment forker un projet exemple
-- Comment configurer le workflow GitHub Actions pour déployer automatiquement sur Astro
-- Comment déclencher et vérifier le déploiement
+This tutorial explains step by step:
+- How to create an Astro deployment
+- How to fork an example project
+- How to configure the GitHub Actions workflow to automatically deploy to Astro
+- How to trigger and verify the deployment
 
-> **Remarque :**  
-> Cette méthode est utile si tu veux garder le contrôle sur tes workflows CI/CD ou si tu ne souhaites pas utiliser l’intégration native GitHub d’Astronomer.
+> **Note:**  
+> This method is useful if you want to keep control over your CI/CD workflows or if you do not want to use Astronomer's native GitHub integration.
 
-Pour plus d’informations, consulte la documentation officielle d’Astronomer.
+For more information, see Astronomer's official documentation.
 
-## Configuration de Weaviate Cloud
+## Weaviate Cloud Configuration
 
-Ce projet peut utiliser [Weaviate Cloud](https://weaviate.io/developers/weaviate/cloud) comme base de données vectorielle pour stocker et rechercher des embeddings.
+This project can use [Weaviate Cloud](https://weaviate.io/developers/weaviate/cloud) as a vector database to store and search embeddings.
 
-### 1. Création d’un compte et d’une instance Weaviate Cloud
+### 1. Create a Weaviate Cloud Account and Instance
 
-1. Rendez-vous sur [Weaviate Cloud Console](https://console.weaviate.cloud/).
-2. Créez un compte ou connectez-vous.
-3. Créez une nouvelle instance (choisissez la région, le nom, etc.).
-4. Une fois l’instance créée, récupérez :
-   - L’**URL de l’instance** (ex : `https://my-instance.weaviate.network`)
-   - Le **API Key** ou le **token d’authentification** si activé
+1. Go to the [Weaviate Cloud Console](https://console.weaviate.cloud/).
+2. Create an account or log in.
+3. Create a new instance (choose region, name, etc.).
+4. Once the instance is created, retrieve:
+   - The **instance URL** (e.g., `https://my-instance.weaviate.network`)
+   - The **API Key** or **authentication token** if enabled
 
-### 2. Configuration de la connexion dans Airflow
+### 2. Configure the Connection in Airflow
 
-Pour que vos DAGs Airflow puissent accéder à Weaviate, il faut configurer une connexion dans l’interface Airflow :
+For your Airflow DAGs to access Weaviate, you need to configure a connection in the Airflow UI:
 
-1. Ouvrez l’interface web d’Airflow.
-2. Allez dans le menu **Admin > Connections**.
-3. Cliquez sur **+** pour ajouter une nouvelle connexion.
-4. Remplissez les champs comme suit :
-   - **Conn Id** : `my_weaviate_conn`  
-     > C’est ce nom qui sera utilisé dans le code pour référencer la connexion.
-   - **Conn Type** : `HTTP` (ou personnalisé si un provider Weaviate est installé)
-   - **Host** : l’URL de votre instance Weaviate (ex : `https://my-instance.weaviate.network`)
-   - **Password** ou **Extra** : ajoutez ici le token d’authentification/API Key si nécessaire, par exemple :
+1. Open the Airflow web interface.
+2. Go to **Admin > Connections**.
+3. Click **+** to add a new connection.
+4. Fill in the fields as follows:
+   - **Conn Id**: `my_weaviate_conn`  
+     > This is the name used in the code to reference the connection.
+   - **Conn Type**: `HTTP` (or custom if a Weaviate provider is installed)
+   - **Host**: the URL of your Weaviate instance (e.g., `https://my-instance.weaviate.network`)
+   - **Password** or **Extra**: add the authentication token/API Key here if needed, for example:
      ```json
-     {"X-OpenAI-Api-Key": "votre-cle-api"}
+     {"X-OpenAI-Api-Key": "your-api-key"}
      ```
-   - **Description** : (optionnel) Connexion à Weaviate Cloud
+   - **Description**: (optional) Connection to Weaviate Cloud
 
-5. Enregistrez la connexion.
+5. Save the connection.
 
-### 3. Utilisation de `my_weaviate_conn` dans le code
+### 3. Using `my_weaviate_conn` in Code
 
-Dans vos DAGs ou scripts, vous pouvez référencer cette connexion par son `Conn Id` :
+In your DAGs or scripts, you can reference this connection by its `Conn Id`:
 
 ```python
 from airflow.hooks.base import BaseHook
 
 conn = BaseHook.get_connection("my_weaviate_conn")
 weaviate_url = conn.host
-api_key = conn.password  # ou via conn.extra si stocké dans Extra
+api_key = conn.password  # or via conn.extra if stored in Extra
 ```
 
-> **Remarque :**  
-> Le nom `"my_weaviate_conn"` est arbitraire, mais il doit correspondre exactement au `Conn Id` défini dans Airflow.  
-> Modifiez-le dans le code si vous choisissez un autre nom lors de la configuration.
+> **Note:**  
+> The name `"my_weaviate_conn"` is arbitrary, but it must match exactly the `Conn Id` defined in Airflow.  
+> Change it in the code if you choose another name during configuration.
 
-Pour plus d’informations, consulte la [documentation officielle Weaviate Cloud](https://weaviate.io/developers/weaviate/cloud) et la [documentation Airflow sur les connexions](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection/index.html).
+For more information, see the [official Weaviate Cloud documentation](https://weaviate.io/developers/weaviate/cloud) and the [Airflow documentation on connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection/index.html).
 
 ---
 
-N’hésitez pas à consulter les ressources ci-dessus pour approfondir vos connaissances sur Airflow et Astronomer. 
+Feel free to consult the resources above to deepen your knowledge of Airflow and Astronomer.
 
-> **Important :**  
-> Le fichier `packages.txt` doit être présent à la racine du projet pour que le build sur Astronomer fonctionne, même s’il est vide.  
-> Ce fichier permet d’installer des paquets système supplémentaires lors du build.  
-> Si tu n’as pas de dépendances système à ajouter, laisse-le vide. 
+> **Important:**  
+> The `packages.txt` file must be present at the root of the project for the build on Astronomer to work, even if it is empty.  
+> This file allows you to install additional system packages during the build.  
+> If you have no system dependencies to add, leave it empty. 

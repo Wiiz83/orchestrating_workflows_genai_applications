@@ -6,3 +6,5 @@ ipython
 ipywidgets>=8.0.0
 jupyter>=1.0.0
 protobuf==5.29.0
+apache-airflow
+pytest
